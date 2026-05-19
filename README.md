@@ -63,7 +63,7 @@ export NANOBANANA_MODEL=gemini-2.5-flash-image
 Install the extension using the `gemini extensions install` command:
 
 ```bash
-gemini extensions install https://github.com/dbaeka/nanobanana-adc
+gemini extensions install https://github.com/dbaeka/nanobanana
 ```
 
 ### 2. Activate
