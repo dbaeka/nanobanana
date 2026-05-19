@@ -20,7 +20,7 @@ const execAsync = promisify(exec);
 export class ImageGenerator {
   private ai: GoogleGenAI;
   private modelName: string;
-  private static readonly DEFAULT_MODEL = 'gemini-2.5-flash-image';
+  private static readonly DEFAULT_MODEL = 'gemini-3.1-flash-image-preview';
 
   constructor(authConfig: AuthConfig) {
     if (process.env.NANOBANANA_GOOGLE_CLOUD_PROJECT) {
@@ -144,7 +144,7 @@ export class ImageGenerator {
 
     throw new Error(
       'ERROR: No valid API key or ADC configuration found. Please set NANOBANANA_GEMINI_API_KEY or configure ADC by setting NANOBANANA_GOOGLE_CLOUD_PROJECT.\n' +
-        'For more details on authentication, visit: https://github.com/google-gemini/gemini-cli/blob/main/docs/cli/authentication.md',
+        'For more details on authentication, visit: https://geminicli.com/docs/get-started/authentication/',
     );
   }
 
