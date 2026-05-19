@@ -1,7 +1,7 @@
 > [!NOTE]  
-> Nano Banana 2 (`gemini-3.1-flash-image-preview`) is now the default model (v1.0.11+)!
+> Nano Banana Pro (`gemini-3-pro-image-preview`) is now supported in this extension (v1.0.10+)!
 >
-> You can still use the Pro model by setting the `NANOBANANA_MODEL` environment variable to `gemini-3-pro-image-preview`.
+> Set the `NANOBANANA_MODEL` environment variable to `gemini-3-pro-image-preview` to use it.
 
 # Nano Banana - Gemini CLI Extension
 
@@ -18,10 +18,18 @@ A professional Gemini CLI extension for generating and manipulating images using
 
 1. **Gemini CLI** installed and configured
 2. **Node.js 20+** and npm
-3. **API Key**: Set the `NANOBANANA_API_KEY` environment variable with your Gemini API key.
-   Get one from [Google AI Studio](https://aistudio.google.com/apikey).
+3. **Authentication**: Configure either an API Key or Application Default Credentials (ADC).
+   - **API Key**: Set one of these environment variables:
+      - `NANOBANANA_GEMINI_API_KEY` (recommended for Gemini API key users who
+      normally authenticate to Gemini CLI using the "Login with Google" option)
+      - `NANOBANANA_GOOGLE_API_KEY` (recommended for Vertex API key users who
+      normally authenticate to Gemini CLI using the "Login with Google" option)
+      - `GEMINI_API_KEY` (fallback)
+      - `GOOGLE_API_KEY` (fallback)
+   - **Application Default Credentials (ADC)**: Set this environment variable:
+      - `NANOBANANA_GOOGLE_CLOUD_PROJECT`: Your Google Cloud project ID. The extension will use ADC for authentication with Vertex AI.
 
-For authentication setup, see the [official Gemini CLI documentation](https://geminicli.com/docs/get-started/authentication/).
+For authentication setup, see the [official Gemini CLI documentation](https://github.com/google-gemini/gemini-cli/blob/main/docs/cli/authentication.md).
 
 ### Key Components
 
@@ -32,20 +40,17 @@ For authentication setup, see the [official Gemini CLI documentation](https://ge
 
 ## 🍌 Model Selection
 
-The following Nano Banana models are supported:
+There are two different Nano Banana models supported by this extension:
 
-- `gemini-3.1-flash-image-preview` (Nano Banana 2 - **default**)
+- `gemini-2.5-flash-image` (default)
 - `gemini-3-pro-image-preview` (Nano Banana Pro)
-- `gemini-2.5-flash-image` (Nano Banana v1)
 
-The `gemini-3.1-flash-image-preview` model is the default. To use a different model, set the `NANOBANANA_MODEL` environment variable:
+The `gemini-2.5-flash-image` model is the default model.
+
+To use the new Gemini 3 Pro powered model set the `NANOBANANA_MODEL` environment variable to `gemini-3-pro-image-preview`.
 
 ```bash
-# Example: Use Nano Banana Pro
 export NANOBANANA_MODEL=gemini-3-pro-image-preview
-
-# Example: Use Nano Banana v1
-export NANOBANANA_MODEL=gemini-2.5-flash-image
 ```
 
 ## 🚀 Installation
@@ -55,7 +60,7 @@ export NANOBANANA_MODEL=gemini-2.5-flash-image
 Install the extension using the `gemini extensions install` command:
 
 ```bash
-gemini extensions install https://github.com/dbaeka/nanobanana-adc
+gemini extensions install https://github.com/gemini-cli-extensions/nanobanana
 ```
 
 ### 2. Activate
@@ -424,7 +429,7 @@ The extension uses the official Model Context Protocol (MCP) SDK for robust clie
 
 ### API Integration
 
-- **Model**: `gemini-3.1-flash-image-preview`
+- **Model**: `gemini-2.5-flash-image`
 - **SDK**: `@google/genai`
 - **Response Handling**: Multiple fallback locations for image data detection
 
@@ -440,10 +445,10 @@ The extension uses the official Model Context Protocol (MCP) SDK for robust clie
 
 1. **"Command not recognized"**: Ensure extension is in `~/.gemini/extensions/nanobanana-extension/` and Gemini CLI is restarted
 
-2. **"No API key found"**: Set `NANOBANANA_API_KEY` environment variable:
+2. **"No API key found"**: Set `GEMINI_API_KEY` environment variable:
 
    ```bash
-   export NANOBANANA_API_KEY="your-api-key-here"
+   export GEMINI_API_KEY="your-api-key-here"
    ```
 
 3. **"Build failed"**: Ensure Node.js 18+ is installed and run:
